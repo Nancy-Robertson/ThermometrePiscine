@@ -8,3 +8,9 @@ echo 'deb http://raspbian.piduino.org stretch piduino' | sudo tee /etc/apt/sourc
 sudo apt update
 sudo apt install mbpoll
 ```
+
+## crontab
+```
+SHELL=/bin/bash
+* * * * * source ~/airtable.env; ~/recordTemperature.sh >recordTemperature.log 2>&1; ~/deleteOldRecord.sh >deleteOldRecord.log 2>&1
+```

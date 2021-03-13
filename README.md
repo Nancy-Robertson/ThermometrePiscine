@@ -77,3 +77,18 @@ else
         cp piscine.csv Shared_Piscine
 fi
 ```
+
+## To collect stats with prometheus
+```
+wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-armv7.tar.gz
+mkdir ~/node_exporter
+cd ~/node_exporter
+tar -xzvf ~/node_exporter-1.1.2.linux-armv7.tar.gz
+scp pi@10.1.1.10:/etc/systemd/system/node_exporter.service .
+# vi node_exporter.service
+# Update the version number as necessary
+sudo mv node_exporter.service /etc/systemd/system/node_exporter.service
+sudo systemctl enable node_exporter.service
+sudo systemctl start node_exporter.service
+sudo systemctl status node_exporter.service
+```

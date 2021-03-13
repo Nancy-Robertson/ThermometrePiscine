@@ -7,12 +7,39 @@ wget -O- http://www.piduino.org/piduino-key.asc | sudo apt-key add -
 echo 'deb http://raspbian.piduino.org stretch piduino' | sudo tee /etc/apt/sources.list.d/piduino.list
 sudo apt update
 sudo apt install mbpoll
+sudo apt-get install jq
+sudo apt-get install smbclient
+sudo timedatectl set-timezone America/Toronto
+
 ```
 
 ## crontab
 ```
 SHELL=/bin/bash
 * * * * * source ~/airtable.env; ~/recordTemperature.sh >recordTemperature.log 2>&1; ~/deleteOldRecord.sh >deleteOldRecord.log 2>&1
+```
+
+## /boot/config.txt
+```
+# Bunch of commented lines omitted
+
+dtparam=i2c_arm=off
+dtparam=audio=on
+[pi4]
+# Enable DRM VC4 V3D driver on top of the dispmanx display stack
+dtoverlay=vc4-fkms-v3d
+max_framebuffers=2
+
+[all]
+#dtoverlay=vc4-fkms-v3d
+enable_uart=1
+
+#Using the PL011 UART por
+dtoverlay=pi3-miniuart-bt
+```
+## /boot/cmdline.txt
+```
+console=tty1 root=PARTUUID=9d180314-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
 ```
 
 ## airtable.env

@@ -38,9 +38,14 @@ enable_uart=1
 #Using the PL011 UART por
 dtoverlay=pi3-miniuart-bt
 ```
-## /boot/cmdline.txt
+## /etc/samba/smb.conf
 ```
-console=tty1 root=PARTUUID=9d180314-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
+[Piscine]
+    path = /home/pi/Shared_Piscine
+    read only = no
+    public = yes
+    writable = yes
+
 ```
 
 ## airtable.env

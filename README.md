@@ -11,7 +11,7 @@ sudo apt-get install -y jq
 sudo apt-get install -y smbclient
 sudo apt-get install -y samba samba-common-bin
 sudo timedatectl set-timezone America/Toronto
-
+mkdir /home/pi/Shared_Piscine
 ```
 
 ## crontab

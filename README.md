@@ -9,6 +9,7 @@ sudo apt update
 sudo apt install -y mbpoll
 sudo apt-get install -y jq
 sudo apt-get install -y smbclient
+sudo apt-get install -y samba samba-common-bin
 sudo timedatectl set-timezone America/Toronto
 
 ```

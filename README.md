@@ -6,6 +6,11 @@ Linux raspberrypi 4.19.118-v7l+ #1311 SMP Mon Apr 27 14:26:42 BST 2020 armv7l GN
 ## Raspberry PI 0W, 512MB
 Linux temp-piscine 5.4.83+ #1379 Mon Dec 14 13:06:05 GMT 2020 armv6l GNU/Linux
 
+## Setup WIFI/SSH server/root password
+```
+sudo raspi-config
+```
+
 Applications à installer
 ```
 wget -O- http://www.piduino.org/piduino-key.asc | sudo apt-key add -

@@ -47,6 +47,10 @@ dtoverlay=pi3-miniuart-bt
     writable = yes
 
 ```
+Restart samba after updating file
+```
+sudo systemctl restart smbd
+```
 
 ## airtable.env
 ```

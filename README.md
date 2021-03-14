@@ -1,7 +1,12 @@
 # Thermometre de Piscine
 
+## Raspberry PI model 4, 2GB 
 Linux raspberrypi 4.19.118-v7l+ #1311 SMP Mon Apr 27 14:26:42 BST 2020 armv7l GNU/Linux
 
+## Raspberry PI 0W, 512MB
+Linux temp-piscine 5.4.83+ #1379 Mon Dec 14 13:06:05 GMT 2020 armv6l GNU/Linux
+
+Applications à installer
 ```
 wget -O- http://www.piduino.org/piduino-key.asc | sudo apt-key add -
 echo 'deb http://raspbian.piduino.org stretch piduino' | sudo tee /etc/apt/sources.list.d/piduino.list
@@ -12,12 +17,6 @@ sudo apt-get install -y smbclient
 sudo apt-get install -y samba samba-common-bin
 sudo timedatectl set-timezone America/Toronto
 mkdir /home/pi/Shared_Piscine
-```
-
-## crontab
-```
-SHELL=/bin/bash
-* * * * * source ~/airtable.env; ~/recordTemperature.sh >recordTemperature.log 2>&1; ~/deleteOldRecord.sh >deleteOldRecord.log 2>&1
 ```
 
 ## /boot/config.txt
@@ -38,6 +37,7 @@ enable_uart=1
 #Using the PL011 UART por
 dtoverlay=pi3-miniuart-bt
 ```
+
 ## /etc/samba/smb.conf
 ```
 [Piscine]
@@ -50,11 +50,6 @@ dtoverlay=pi3-miniuart-bt
 Restart samba after updating file
 ```
 sudo systemctl restart smbd
-```
-
-## airtable.env
-```
-AIRTABLE_API_KEY=****
 ```
 
 ## recordTemperature.sh
@@ -88,17 +83,34 @@ else
 fi
 ```
 
+## airtable.env
+```
+AIRTABLE_API_KEY=****
+```
+
+## crontab
+```
+SHELL=/bin/bash
+* * * * * source ~/airtable.env; ~/recordTemperature.sh >recordTemperature.log 2>&1; ~/deleteOldRecord.sh >deleteOldRecord.log 2>&1
+```
+
 ## To collect stats with prometheus
 ```
 wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-armv7.tar.gz
 mkdir ~/node_exporter
 cd ~/node_exporter
 tar -xzvf ~/node_exporter-1.1.2.linux-armv7.tar.gz
-scp pi@10.1.1.10:/etc/systemd/system/node_exporter.service .
+scp pi@10.1.1.XXX:/etc/systemd/system/node_exporter.service .
 # vi node_exporter.service
 # Update the version number as necessary
 sudo mv node_exporter.service /etc/systemd/system/node_exporter.service
 sudo systemctl enable node_exporter.service
 sudo systemctl start node_exporter.service
 sudo systemctl status node_exporter.service
+```
+
+## On the prometheus server:
+### /home/pi/prometheus/prometheus.yml
+```
+    - targets: ['10.1.1.XXX:9100']
 ```

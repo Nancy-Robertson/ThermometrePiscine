@@ -10,6 +10,18 @@ Linux temp-piscine 5.4.83+ #1379 Mon Dec 14 13:06:05 GMT 2020 armv6l GNU/Linux
 ```
 sudo raspi-config
 ```
+* 3 - Interface Options
+  * P6 - Serial Port
+    * Would you like a login shell to be accessible over serial? No
+    * Would you like the serial port hardware to be enabled? Yes
+  * P2 - SSH
+
+* 1 - System Options
+  * S1 Wireless LAN
+    * Enter SSID and Passworrd
+  * S3 - password
+  * S4 - hostname
+
 
 Applications à installer
 ```
